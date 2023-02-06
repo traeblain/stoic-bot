@@ -14,4 +14,4 @@ jobs:
         run: |
           curl --request GET \
           --url 'https://stoic-bot.vercel.app/api/stoicpost' \
-          --header 'Authorization: Bearer $SUPER_SECRET_KEY'
+          --header 'Authorization: Bearer ${{ secrets.SUPER_SECRET_KEY }}'
