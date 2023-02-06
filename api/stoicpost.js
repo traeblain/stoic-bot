@@ -83,8 +83,19 @@ const generateRandoms = (min, max, numOfRandoms, unique) => {
 }
 
 module.exports = async (req, res) => {
-  const data = await postQuote()
-  console.log(data)
-  res.setHeader('content-type', 'text/plain')
-  res.send(`Posted the following quote\n\n\n${JSON.stringify(data)}`)
+  const { authorization } = req.headers
+  if (authorization === `Bearer ${process.env.SUPER_SECRET_KEY}`) {
+    const data = await postQuote()
+    console.log(data)
+    res.setHeader('content-type', 'application/json')
+    res.status(200).json({
+      postedQuote: data,
+      success: true
+    })
+  } else {
+    res.status(401).json({
+      success: false,
+      body: 'Authorization code invalid.'
+    })
+  }
 }
