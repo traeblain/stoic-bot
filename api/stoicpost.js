@@ -83,5 +83,5 @@ module.exports = async (req, res) => {
   const data = await postQuote()
   console.log(data)
   res.setHeader('content-type', 'text/plain')
-  res.send(`Posted the following quote\n\n\n${data}`)
+  res.send(`Posted the following quote\n\n\n${JSON.stringify(data)}`)
 }
