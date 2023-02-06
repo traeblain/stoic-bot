@@ -36,7 +36,7 @@ const postQuote = async () => {
     if (status.length > 500) {
       status = status.substring(0, status.lastIndexOf(' '))
     }
-    fetch('https://botsin.space/api/v1/statuses', {
+    const mastPost = fetch('https://botsin.space/api/v1/statuses', {
       method: "post",
       headers: {
         'Content-Type': 'application/json',
@@ -59,8 +59,11 @@ const postQuote = async () => {
       ]).catch((err) => {
         console.error(err)
       })
-    }).catch(console.error)
-    return quotes[0]
+      return quotes[0]
+    }).catch((err) => {
+      return err
+    })
+    return mastPost
   })
   return selectedQuote
 }
