@@ -65,6 +65,7 @@ const postQuote = async () => {
     })
     return mastPost
   })
+  console.log(selectedQuote)
   return selectedQuote
 }
 
@@ -79,11 +80,13 @@ const generateRandoms = (min, max, numOfRandoms, unique) => {
         randoms.push(random);
       }
     }
+    console.log(randoms)
     return randoms;
 }
 
 module.exports = async (req, res) => {
   const { authorization } = req.headers
+  console.log("Auth: ", authorization)
   if (authorization === `Bearer ${process.env.SUPER_SECRET_KEY}`) {
     const data = await postQuote()
     console.log(data)
