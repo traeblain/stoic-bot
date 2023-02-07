@@ -51,7 +51,7 @@ main {
   text-align: center;
 }
 h1 {
-  font-size: 20vw;
+  font-size: min(20vw, 250px);
 }
 p {
   line-height: 1.4;
