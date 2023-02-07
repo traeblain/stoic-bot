@@ -3,6 +3,12 @@ html {
   font-size: 1em;
   line-height: 1.4;
 }
+@font-face {
+  font-family: 'Libertinus Math';
+  src: url('LibertinusMath-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -63,7 +69,19 @@ span.dot {
 span.pt {
   color: #406b6d;
 }
-
+math {
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size-adjust: none;
+  text-indent: 0;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  direction: ltr;
+  /* font-family: 'Fira Math', math; */
+  font-family: Libertinus Math, math;
+}
 
 
 
