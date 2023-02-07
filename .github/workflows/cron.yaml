@@ -13,5 +13,5 @@ jobs:
           SUPER_SECRET_KEY: ${{ secrets.SUPER_SECRET_KEY }}
         run: |
           curl --request GET \
-          --url 'https://stoic-bot.vercel.app/api/stoicpost' \
+          --url 'https://trapt.vercel.app/api/stoicpost' \
           --header 'Authorization: Bearer ${{ secrets.SUPER_SECRET_KEY }}'
