@@ -41,7 +41,7 @@ const postQuote = async (dev) => {
     const postObject = {
       status: status
     }
-    if (dev) {
+    if (dev === 'true') {
       const now = new Date()
       now.setDate(now.getDate() + 14)
       postObject.schedule_at = now.toISOString()
