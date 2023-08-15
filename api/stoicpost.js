@@ -19,6 +19,7 @@ const postQuote = async () => {
   }).then(result => {
     const total = quoteBase.length
     const quoteOptions = generateRandoms(0, total, 10, true)
+    console.log('Random #s:', quoteOptions)
     const quotes = quoteOptions
       .map( s => quoteBase[s] )
       .sort( (a, b) => { return a.count - b.count })
@@ -36,6 +37,7 @@ const postQuote = async () => {
     if (status.length > 500) {
       status = status.substring(0, status.lastIndexOf(' '))
     }
+    console.log('Generated Status: ', status)
     const mastPost = fetch('https://botsin.space/api/v1/statuses', {
       method: "post",
       headers: {
@@ -49,6 +51,7 @@ const postQuote = async () => {
       if(!response.ok) {
         throw new Error('Could not post to Mastodon.', response)
       }
+      console.log('Successful post! ', response)
       base('Quotes').update([
         {
           "id": quotes[0].id,
@@ -65,23 +68,23 @@ const postQuote = async () => {
     })
     return mastPost
   })
-  console.log(selectedQuote)
+  console.log('Mastodon Response: ', selectedQuote)
   return selectedQuote
 }
 
 const generateRandoms = (min, max, numOfRandoms, unique) => {
-    var getRandom = function(x, y){
-      return Math.floor(Math.random() * (x - y + 1) + y);
+  var getRandom = function(x, y){
+    return Math.floor(Math.random() * (x - y + 1) + y)
+  }
+  var randoms = []
+  while(randoms.length<numOfRandoms){
+    var random = getRandom(min, max)
+    if(randoms.indexOf(random)==-1||!unique){
+      randoms.push(random)
     }
-    var randoms = [];
-    while(randoms.length<numOfRandoms){
-      var random = getRandom(min, max);
-      if(randoms.indexOf(random)==-1||!unique){
-        randoms.push(random);
-      }
-    }
-    console.log(randoms)
-    return randoms;
+  }
+  console.log('Internal Random #s ', randoms)
+  return randoms
 }
 
 module.exports = async (req, res) => {
