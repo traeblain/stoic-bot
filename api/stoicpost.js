@@ -3,7 +3,7 @@ const base = require('airtable').base('appYOXxruKPof8nRx')
 
 const quoteBase = []
 
-const postQuote = async () => {
+const postQuote = async (dev) => {
   const selectedQuote = base('Quotes').select({
     maxRecords: 1000
   }).eachPage(page = (records, fetchNextPage) => {
@@ -38,15 +38,21 @@ const postQuote = async () => {
       status = status.substring(0, status.lastIndexOf(' '))
     }
     console.log('Generated Status: ', status)
+    const postObject = {
+      status: status
+    }
+    if (dev) {
+      const now = new Date()
+      now.setDate(now.getDate() + 14)
+      postObject.schedule_at = now.toISOString()
+    }
     const mastPost = fetch('https://botsin.space/api/v1/statuses', {
       method: "post",
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + process.env.MASTODON_KEY
       },
-      body: JSON.stringify({
-        status: status
-      })
+      body: JSON.stringify(postObject)
     }).then(response => {
       if(!response.ok) {
         throw new Error('Could not post to Mastodon.', response)
@@ -88,9 +94,9 @@ const generateRandoms = (min, max, numOfRandoms, unique) => {
 }
 
 module.exports = async (req, res) => {
-  const { authorization } = req.headers
+  const { authorization, dev } = req.headers
   if (authorization === `Bearer ${process.env.SUPER_SECRET_KEY}`) {
-    const data = await postQuote()
+    const data = await postQuote(dev)
     console.log(data)
     res.setHeader('content-type', 'application/json')
     res.status(200).json({
