@@ -58,7 +58,7 @@ const postQuote = async (dev) => {
       if(!response.ok) {
         throw new Error('Could not post to Mastodon.', response)
       }
-      return response.body.json()
+      return response.json()
     }).then(mastresp => {
       console.log('Successful post! ', mastresp)
       base('Quotes').update([
