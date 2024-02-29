@@ -58,7 +58,7 @@ const postQuote = async (dev) => {
       if(!response.ok) {
         throw new Error('Could not post to Mastodon.', response)
       }
-      console.log('Successful post! ', response)
+      console.log('Successful post! ', response.body)
       base('Quotes').update([
         {
           "id": quotes[0].id,
