@@ -45,7 +45,7 @@ const postQuote = async (dev) => {
       const now = new Date()
       now.setDate(now.getDate() + 14)
       console.log('This is a dev post, posting as a schedule: ', now.toString())
-      postObject.schedule_at = now.toISOString()
+      postObject.scheduled_at = now.toISOString()
     }
     const mastPost = fetch('https://botsin.space/api/v1/statuses', {
       method: "post",
