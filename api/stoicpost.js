@@ -47,6 +47,7 @@ const postQuote = async (dev) => {
       console.log('This is a dev post, posting as a schedule: ', now.toString())
       postObject.scheduled_at = now.toISOString()
     }
+    console.log(process.env.MASTODON_KEY)
     const mastPost = fetch('https://botsin.space/api/v1/statuses', {
       method: "post",
       headers: {
