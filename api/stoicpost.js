@@ -18,7 +18,7 @@ const postQuote = async (dev) => {
     fetchNextPage()
   }).then(result => {
     const total = quoteBase.length
-    const quoteOptions = generateRandoms(0, total, 10, true)
+    const quoteOptions = generateRandoms(0, total, 35, true)
     console.log('Random #s:', quoteOptions)
     const quotes = quoteOptions
       .map( s => quoteBase[s] )
