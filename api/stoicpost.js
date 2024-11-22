@@ -48,11 +48,11 @@ const postQuote = async (dev) => {
       postObject.scheduled_at = now.toISOString()
     }
     console.log(process.env.MASTODON_KEY)
-    const mastPost = fetch('https://botsin.space/api/v1/statuses', {
+    const mastPost = fetch('https://mas.to/api/v1/statuses', {
       method: "post",
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + process.env.MASTODON_KEY
+        'Authorization': 'Bearer ' + process.env.MASTO_KEY
       },
       body: JSON.stringify(postObject)
     }).then(response => {
